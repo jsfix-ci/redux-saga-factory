@@ -1,19 +1,48 @@
+import "reflect-metadata";
 import { createTestStore } from './createTestStore';
-import { takeWrapper } from '../src/effectWrappers';
+import { takeWrapper, takeEveryWrapper, takeLatestWrapper} from '../src/effectWrappers';
 
-describe("takeWrapper", () => {
+describe("Effect Wrappers", () => {
 
-    it("Should take action", done => {
+    it("takeWrapper", () => {
       const actionName = "some-action";
+      const spy = jest.fn();
+
       const { store } = createTestStore(() =>
-        takeWrapper(actionName, function*(action) {
-          if (action.type === actionName) {
-            done();
-          } else {
-            done("Wrong action received");
-          }
-        })
+        takeWrapper(actionName, spy)
       );
-      store.dispatch({ type: actionName });
+
+      const action = { type: actionName, payload: 'foo'}
+      store.dispatch(action);
+      expect(spy).toBeCalledWith(action)
     });
+
+    it("takeEveryWrapper", () => {
+        const actionName = "some-action";
+        const spy = jest.fn();
+  
+        const { store } = createTestStore(() =>
+            takeEveryWrapper(actionName, spy)
+        );
+  
+        const action = { type: actionName, payload: 'foo'}
+        store.dispatch(action);
+        expect(spy).toBeCalledWith(action)
+    })
+
+    it("takeLatestWrapper", () => {
+        const actionName = "some-action";
+        const spy = jest.fn();
+  
+        const { store } = createTestStore(() =>
+            takeLatestWrapper(actionName, spy)
+        );
+  
+        const action = { type: actionName, payload: 'foo'}
+        store.dispatch(action);
+        store.dispatch(action);
+        store.dispatch(action);
+
+        expect(spy).toBeCalledWith(action)
+    })
   });

@@ -1,4 +1,4 @@
-
+import "reflect-metadata";
 import { Action, createStore, applyMiddleware } from "redux";
 import sagaMiddlewareFactory from "redux-saga";
 
@@ -14,6 +14,11 @@ export function createTestStore(saga) {
     const sagaMiddleware = sagaMiddlewareFactory();
   
     const store = createStore(reducer, applyMiddleware(sagaMiddleware));
-    sagaMiddleware.run(saga);
+    
+    if(typeof(saga)==='object'){
+      Object.values(saga).forEach(item => sagaMiddleware.run(item))
+    } else {
+      sagaMiddleware.run(saga);
+    }
     return { actions, store };
   }
