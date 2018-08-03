@@ -3,7 +3,7 @@ verbose: true,
   rootDir: ".",
   globals: {
     "ts-jest": {
-      tsConfigFile: "tsconfig.json"
+      tsConfigFile: "tsconfig.jest.json"
     }
   },
   transform: {

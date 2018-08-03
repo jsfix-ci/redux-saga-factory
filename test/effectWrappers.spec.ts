@@ -11,10 +11,9 @@ describe("Effect Wrappers", () => {
       const { store } = createTestStore(() =>
         takeWrapper(actionName, spy)
       );
-
       const action = { type: actionName, payload: 'foo'}
       store.dispatch(action);
-      expect(spy).toBeCalledWith(action)
+      expect(spy).toBeCalledWith(action);
     });
 
     it("takeEveryWrapper", () => {
