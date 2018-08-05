@@ -1,5 +1,18 @@
 # redux-saga-factory 🏭
 
+# Introduction 
+
+Sagas are great, but they don’t always fit nicely inside large scale projects since:
+
+1.  They are nothing more than generator functions, so it is impossible to use them with dependency injection patterns.
+2.  You often have to type repeated boilerplate only to wrap the actual action handler.
+
+This library will allow you to: 
+
+1.  Create sagas using factory classes.
+2.  Leverage decorators to yield common saga patterns (hence removing boilerplate).
+
+
 ## Installation
 
 ```
@@ -49,23 +62,7 @@ Object.values(saga).forEach(item => sagaMiddleware.run(item));
 
 > ⚠️ **You must `import "reflect-metadata"` polyfill  and you should only import it once in the code.**
 
-# What's in the factory?
-
-## The why
-
-Sagas are great, but they don’t always fit nicely inside large scale projects since:
-
-1.  Sagas are nothing more than generator functions, so it is impossible to use them with dependency injection patterns.
-2.  You often have to type repeated boilerplate only to wrap the actual action handler.
-
-## The what
-
-This tiny lib overcome those two issues by allowing you to:
-
-1.  Create sagas using factory classes.
-2.  Leverage decorators to yield common saga patterns.
-
-## The how
+# Deeper look
 
 Say you have this saga:
 
