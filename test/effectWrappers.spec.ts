@@ -8,7 +8,7 @@ describe("Effect Wrappers", () => {
       const actionName = "some-action";
       const spy = jest.fn();
 
-      const { store } = createTestStore(() =>
+      const store = createTestStore(() =>
         takeWrapper(actionName, spy)
       );
       const action = { type: actionName, payload: 'foo'}
@@ -20,7 +20,7 @@ describe("Effect Wrappers", () => {
         const actionName = "some-action";
         const spy = jest.fn();
   
-        const { store } = createTestStore(() =>
+        const store = createTestStore(() =>
             takeEveryWrapper(actionName, spy)
         );
   
@@ -33,7 +33,7 @@ describe("Effect Wrappers", () => {
         const actionName = "some-action";
         const spy = jest.fn();
   
-        const { store } = createTestStore(() =>
+        const store = createTestStore(() =>
             takeLatestWrapper(actionName, spy)
         );
   

@@ -1,16 +1,17 @@
 import "reflect-metadata";
 import { Action, createStore, applyMiddleware } from "redux";
 import sagaMiddlewareFactory from "redux-saga";
+import "redux-snoop";
 
+jest.mock("redux", () => {
+  const inject = require("redux-snoop").injectReduxSnoop;
+  return inject();
+});
 /**
  * Helper method to create a store with saga and spy on dispatched actions
  */
 export function createTestStore(saga) {
-    let actions: any[] = [];
-    const reducer = (state = {}, action) => {
-      actions.push(action);
-      return { ...state };
-    };
+    const reducer = (state = {}, action) => ( { ...state });
     const sagaMiddleware = sagaMiddlewareFactory();
   
     const store = createStore(reducer, applyMiddleware(sagaMiddleware));
@@ -20,5 +21,5 @@ export function createTestStore(saga) {
     } else {
       sagaMiddleware.run(saga);
     }
-    return { actions, store };
+    return store;
   }

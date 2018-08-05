@@ -22,7 +22,7 @@ describe("redux-saga-factory", () => {
     }
 
     const instance = new SagaFac();
-    const { store } = createTestStore(instance.getSagas());
+    const store = createTestStore(instance.getSagas());
     store.dispatch(action({ test: "world" }));
   });
 
@@ -33,7 +33,7 @@ describe("redux-saga-factory", () => {
     }
     const saga = take(action)(someSaga);
 
-    const { store } = createTestStore(saga);
+    const store = createTestStore(saga);
     store.dispatch({ type: action, foo: "bar" });
   });
 });
