@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { SagaFactory } from '../src/Sagafactory';
+import { SagaFactory } from '../src/SagaFactory';
 import { take } from '../src/decorators';
 
 describe('SagaFactory', () => {

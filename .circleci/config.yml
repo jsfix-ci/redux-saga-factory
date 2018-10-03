@@ -60,10 +60,7 @@ jobs:
           at: ~/circleci-deployment
       - run:
           name: "Test service"
-          command:  "npm publish"
-      - run:
-          name: "Upload coverage"
-          command: "bash <(curl -s https://codecov.io/bash)"
+          command: "npx semantic-release"
 
 workflows:
   version: 2

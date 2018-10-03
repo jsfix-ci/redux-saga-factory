@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { take } from "../src/decorators";
 import { actionCreatorFactory } from "typescript-fsa";
 import { createTestStore } from "./createTestStore";
-import { SagaFactory } from "../src/Sagafactory";
+import { SagaFactory } from "../src/SagaFactory";
 
 describe("Decorators with asyncAction", () => {
   it("Should wrap with asyncAction", async () => {
