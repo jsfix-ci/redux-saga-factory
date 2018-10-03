@@ -16,7 +16,7 @@ defaults: &defaults
 jobs:
   ######################### build ##########################
 
-  "build":
+  "build-test":
     <<: *defaults
     steps:
       - checkout
@@ -37,21 +37,15 @@ jobs:
       - run:
           name: "Building"
           command: "yarn run build"
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  "test":
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/circleci-deployment
       - run:
           name: "Test service"
           command:  "yarn run test"
       - run:
           name: "Upload coverage"
           command: "bash <(curl -s https://codecov.io/bash)"
+      - persist_to_workspace:
+          root: .
+          paths: .
 
   "publish":
     <<: *defaults
@@ -69,25 +63,19 @@ workflows:
   version: 2
   build-branch:
     jobs:
-      - build:
+      - build-test:
           context: web
           filters:
             branches:
               ignore:
                 - master
-      - test: 
-          requires: 
-            - build
 
   build-master:
     jobs:
-      - build:
+      - build-test:
           filters:
             branches:
               only: master
-      - test: 
-          requires: 
-            - build
       - publish:
           requires:
-            - test
+            - build-test
