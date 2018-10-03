@@ -146,7 +146,7 @@ class MultiSaga extends SagaFactory {
 	}
 
 	@takeLatest("some_action")
-        *anotherSagaWorker(payload) {
+	*anotherSagaWorker(payload) {
 		// using takeLatest effect instead of take
 	}
 }
@@ -200,7 +200,7 @@ class FsaSaga extends SagaFactory {
 //
 // 1. SUBMIT_ACTION
 // 2. SUBMIT_ASYNC_ACTION_STARTED
-// --- Here sagaWorker iwll be called ---
+// --- Here sagaWorker will be called ---
 // 3. SUBMIT_ASYNC_ACTION_DONE
 ```
 
