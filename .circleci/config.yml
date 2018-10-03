@@ -26,12 +26,6 @@ jobs:
           name: "Show build tag"
           command: echo $CIRCLE_TAG $CIRCLE_PROJECT_REPONAME
       - run:
-          name: uninstall old yarn
-          command: "rm -rf ./usr/local/lib/node_modules/yarn"
-      - run:
-          name: install yarn 1.5.1
-          command: "sudo npm install -g yarn@1.5.1"
-      - run:
           name: "Installing files"
           command: "yarn install"
       - run:
@@ -40,9 +34,6 @@ jobs:
       - run:
           name: "Test service"
           command:  "yarn run test"
-      - run:
-          name: "Upload coverage"
-          command: "bash <(curl -s https://codecov.io/bash)"
       - persist_to_workspace:
           root: .
           paths: .
@@ -56,7 +47,7 @@ jobs:
           name: Avoid hosts unknown for github
           command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
-          name: "Test service"
+          name: "Semantic publishiing"
           command: "npx semantic-release"
 
 workflows:
