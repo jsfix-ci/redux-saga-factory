@@ -34,6 +34,9 @@ jobs:
       - run:
           name: "Test service"
           command:  "yarn run test"
+      - run:
+          name: "Upload coverage"
+          command: "bash <(curl -s https://codecov.io/bash)"
       - persist_to_workspace:
           root: .
           paths: .
